@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+   <head>
+       <title>Pirate Translator</title>
+       <style>
+           body{
+               text-align: center;
+               font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+           }
+           .translated{
+               width:30%;
+               padding:1em;
+               font-size:1em;
+               background-color: #383737;
+               border-radius: 3px;
+               color:rgb(253, 249, 249);
+               margin-left: auto;
+               margin-right:auto;
+           }
+           input{
+               width:20%;
+               padding:0.5em ;
+               border-radius: 3px;
+               margin-left: auto;
+               margin-right:auto;
+               background-color: #8b8b8b;
+           }
+           button{
+               width:10%;
+               padding:0.5em ;
+               border-radius: 3px;
+               margin-left: auto;
+               margin-right:auto;
+           }
+       </style>
+   </head>
+   <body>
+       <h1>Ahoy Matey! This is your Priate Translator!</h1>
+       <br/>
+       <input type="text" name="translator" id="PlainText"/>
+       <button onclick="Display()">Translate</button>
+       <br/>
+       <br/>
+       <div class="translated" id="box">-- Translated Text --</div>
+       <script type="text/javascript">
+           function Capitalize(str)
+           {
+               return str.charAt(0).toUpperCase() + str.substring(1);
+           }
+
+           function Translate(text)
+           {
+               for (var i = 0; i < PHRASES.length; i++) {
+                   var toReplace = new RegExp("\\b"+PHRASES[i][0]+"\\b", "i");
+                   var index = text.search(toReplace);
+                   while (index != -1) {
+                       if (text.charAt(index) >= "A" && text.charAt(index) <= "Z") {
+                           text = text.replace(toReplace, Capitalize(PHRASES[i][1]));
+                       }
+                       else {
+                           text = text.replace(toReplace, PHRASES[i][1]);
+                       }
+                       index = text.search(toReplace);
+                   }
+               }
+               return text;
+           }
+           function Display(){
+               var x = document.getElementById("PlainText").value;
+               var translation=Translate(x);
+               var result="Translated Text: "+translation;
+               document.getElementById("box").innerHTML=result;
+           }
+           PHRASES = [["hello", "ahoy"], ["hi", "yo-ho-ho"], ["pardon me", "avast"],
+               ["excuse me", "arrr"],
+               ["my", "me"], ["friend", "me bucko"], ["sir", "matey"],
+               ["madam", "proud beauty"], ["miss", "comely wench"],
+               ["stranger", "scurvy dog"], ["officer", "foul blaggart"],
+               ["where", "whar"], ["is", "be"], ["the", "th'"], ["you", "ye"],
+               ["tell", "be tellin'"], ["know", "be knowin'"],
+               ["how far", "how many leagues"], ["old", "barnacle-covered"],
+               ["attractive", "comely"], ["happy", "grog-filled"],
+               ["nearby", "broadside"], ["restroom", "head"], ["restaurant", "galley"],
+               ["hotel", "fleabag inn"], ["pub", "Skull & Scuppers"],
+               ["bank", "buried trasure"]
+              ];
+       </script>
+   </body>
+</html>
