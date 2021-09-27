@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ContactIntent</string>
+    <string name="contact_name">Title</string>
+    <string name="contact_number">Details</string>
+</resources>
